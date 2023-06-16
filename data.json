@@ -1,0 +1,139 @@
+{
+  "orders": [
+    {
+      "id": 1,
+      "title": "Order 1",
+      "date": "2017-06-29 12:09:33",
+      "description": "this is order number 1",
+      "products": [{
+        "id": 1,
+        "quantity": 3
+      }]
+    },
+    {
+      "id": 2,
+      "title": "Order 2",
+      "date": "2017-06-29 14:09:33",
+      "description": "this is order number 2",
+      "products": [{
+        "id": 2,
+        "quantity": 3
+      }, {
+        "id": 3,
+        "quantity": 1
+      }]
+    },
+    {
+      "id": 3,
+      "title": "Order 3",
+      "date": "2017-06-29 16:09:33",
+      "description": "this is order number 3",
+      "products": [{
+        "id": 3,
+        "quantity": 2
+      }, {
+        "id": 1,
+        "quantity": 2
+      }]
+    }, {
+      "id": 4,
+      "title": "Order 4",
+      "date": "2015-06-25 14:09:33",
+      "description": "this is order number 4",
+      "products": [{
+        "id": 3,
+        "quantity": 1
+      }, {
+        "id": 4,
+        "quantity": 2
+      }]
+    }, {
+      "id": 5,
+      "title": "Order 5",
+      "date": "2019-06-25 15:09:33",
+      "description": "this is order number 5",
+      "products": [{
+        "id": 4,
+        "quantity": 1
+      }, {
+        "id": 2,
+        "quantity": 3
+      }]
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "serialNumber": 1111,
+      "isNew": true,
+      "photo": "images/product1.jpg",
+      "title": "Product 1",
+      "type": "Monitors",
+      "specification": "specification 1",
+      "guarantee": {
+        "start": "2016-06-29 12:09:33",
+        "end": "2017-06-29 12:09:33"
+      },
+      "price": [
+        {"value": 100, "symbol": "USD", "isDefault": false},
+        {"value": 2600, "symbol": "UAH", "isDefault": true}
+      ],
+      "order": 2,
+      "date": "2017-06-29 12:09:33"
+    }, {
+      "id": 2,
+      "serialNumber": 2222,
+      "isNew": true,
+      "photo": "images/product2.jpg",
+      "title": "Product 2",
+      "type": "Computers",
+      "specification": "specification 2",
+      "guarantee": {
+        "start": "2017-02-29 12:09:33",
+        "end": "2018-02-29 12:09:33"
+      },
+      "price": [
+        {"value": 200, "symbol": "USD", "isDefault": false},
+        {"value": 5200, "symbol": "UAH", "isDefault": true}
+      ],
+      "order": 3,
+      "date": "2015-06-29 12:09:33"
+    }, {
+      "id": 3,
+      "serialNumber": 3333,
+      "isNew": false,
+      "photo": "images/product3.jpg",
+      "title": "Product 3",
+      "type": "Monitors",
+      "specification": "specification 2",
+      "guarantee": {
+        "start": "2014-01-29 12:09:33",
+        "end": "2016-01-29 12:09:33"
+      },
+      "price": [
+        {"value": 300, "symbol": "USD", "isDefault": false},
+        {"value": 5300, "symbol": "UAH", "isDefault": true}
+      ],
+      "order": 4,
+      "date": "2016-06-29 12:09:33"
+    }, {
+      "id": 4,
+      "serialNumber": 4444,
+      "isNew": false,
+      "photo": "images/product4.jpg",
+      "title": "Product 4",
+      "type": "Computers",
+      "specification": "specification 1",
+      "guarantee": {
+        "start": "2018-01-29 12:09:33",
+        "end": "2019-01-29 12:09:33"
+      },
+      "price": [
+        {"value": 300, "symbol": "USD", "isDefault": false},
+        {"value": 5300, "symbol": "UAH", "isDefault": true}
+      ],
+      "order": 5,
+      "date": "2016-06-29 12:09:33"
+    }
+  ]
+}
