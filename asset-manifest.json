@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.64ba3291.css",
-    "main.js": "/static/js/main.39f8fa81.js",
-    "static/js/787.5069e482.chunk.js": "/static/js/787.5069e482.chunk.js",
-    "index.html": "/index.html",
-    "main.64ba3291.css.map": "/static/css/main.64ba3291.css.map",
-    "main.39f8fa81.js.map": "/static/js/main.39f8fa81.js.map",
-    "787.5069e482.chunk.js.map": "/static/js/787.5069e482.chunk.js.map"
+    "main.css": "/Aartemius/products-n-orders/static/css/main.64ba3291.css",
+    "main.js": "/Aartemius/products-n-orders/static/js/main.f2e1617f.js",
+    "static/js/787.5069e482.chunk.js": "/Aartemius/products-n-orders/static/js/787.5069e482.chunk.js",
+    "index.html": "/Aartemius/products-n-orders/index.html",
+    "main.64ba3291.css.map": "/Aartemius/products-n-orders/static/css/main.64ba3291.css.map",
+    "main.f2e1617f.js.map": "/Aartemius/products-n-orders/static/js/main.f2e1617f.js.map",
+    "787.5069e482.chunk.js.map": "/Aartemius/products-n-orders/static/js/787.5069e482.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.64ba3291.css",
-    "static/js/main.39f8fa81.js"
+    "static/js/main.f2e1617f.js"
   ]
 }
