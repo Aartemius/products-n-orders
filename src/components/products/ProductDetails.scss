@@ -1,0 +1,34 @@
+.product-card {
+  &>* {
+    margin: 0 1%;
+  }
+  .product-img-wrap {
+    width: 6%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  .product-title-wrap {
+    width: 22%;
+  }
+  .product-type {
+    width: 10%;
+  }
+  .guarantee-wrap {
+    width: 20%;
+  }
+  .is-new {
+    width: 6%;
+  }
+  .price-wrap {
+    width: 17%;
+  }
+  .product-specification {
+    width: 6%;
+  }
+  .product-date {
+    width: 12%;
+  }
+}
