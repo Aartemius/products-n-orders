@@ -1,5 +1,4 @@
-import { IOrder } from '../components/orders/Orders';
-import { IProduct } from '../components/products/ProductDetails';
+import { IOrder, IProduct } from '../types/common';
 import { ActionTypes } from './actions';
 import { combineReducers } from 'redux';
 
@@ -12,7 +11,11 @@ export interface AppState {
 const orderListReducer = (state: IOrder[] = [], action: any) => {
   switch (action.type) {
     case ActionTypes.SET_ORDER_LIST:
-      return action.payload;
+      return window.sessionStorage.getItem('ordersList')
+      ?
+      JSON.parse(window.sessionStorage.getItem('ordersList')!) as IOrder[]
+      :
+      action.payload;
     default:
       return state;
   }
@@ -30,7 +33,11 @@ const productReducer = (state: IProduct | null = null, action: any) => {
 const productsListReducer = (state: IProduct[] = [], action: any) => {
   switch (action.type) {
     case ActionTypes.SET_PRODUCTS_LIST:
-      return action.payload;
+      return window.sessionStorage.getItem('productsList')
+      ?
+      JSON.parse(window.sessionStorage.getItem('productsList')!) as IProduct[]
+      :
+      action.payload;
     default:
       return state;
   }

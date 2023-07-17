@@ -1,80 +1,50 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import OrderProducts from "./OrderProducts";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../../store/reducers";
+import { useOrderList, useProductsList } from "../../hooks/common";
+import { setOrderList, setProductsList } from "../../store/actions";
+import Order from "./Order";
 
-export interface IOrder {
-  id: number;
-  title: string;
-  date: string;
-  description: string;
-  products: {
-    id: number;
-    quantity: number;
-  }[];
-}
-
-interface IOrderProps {
-  orders: IOrder[];
-  onClick?: () => void;
-}
-
-const Orders: FC<IOrderProps> = ({orders, onClick}) => {
+const Orders: FC = () => {
   const [activeOrderId, setActiveOrderId] = useState<number | undefined>(undefined);
-  const [ordersList, setOrdersList] = useState(orders);
+  const dispatch = useDispatch();
+  const { orders, isLoading } = useOrderList();
 
-  const handleOrderDelete = (index: number) => {
-    setOrdersList([...ordersList.slice(0, index), ...ordersList.slice(index + 1)]);
-    if (activeOrderId === ordersList[index].id) {
-      setActiveOrderId(undefined);
-    }
-  };
+  const { products } = useProductsList();
+  useEffect(() => {
+    dispatch(setProductsList(products));
+    dispatch(setOrderList(orders));
+  }, [
+  products,
+  dispatch,
+  orders
+]);
+
+
+  const orderList = useSelector((state: AppState) => state.orderList);
   
   return (
   <>
     <div style={{ width: activeOrderId ? '40%' : '100%' }}>
-      <h3>Orders List / {ordersList.length}</h3>
-      {ordersList.map((order, index) => (
-        <div
-          key={`order${order.id}`}
+      <h3>Orders List / {orderList.length}</h3>
+      {isLoading &&
+        <div>Loading...</div>
+      }
+      <div className="d-flex flex-column">
+      {orderList.map((order, index) => (
+        <Order 
+          key={order.id}
+          index={index}
+          order={order}
           onClick={() => setActiveOrderId(order.id)}
-          className="d-flex align-items-center border border-dark mb-2 justify-content-between p-2"
-        >
-          {!activeOrderId &&
-            <span>{order.title}</span>
-          }
-          <img
-            src="images/listIcon.svg"
-            alt="products"
-            onClick={onClick}
-            style={{
-              width: '30px',
-              cursor: 'pointer'
-            }}
-          />
-          <span className="text-start">
-            {order.products.length ? order.products.length : 'No'}<br/>Product(s)
-          </span>
-          {!activeOrderId &&
-            <span>{order.description}</span>
-          }
-          <span>{order.date}</span>
-          <img
-            style={{
-              width: '30px',
-              cursor: 'pointer'
-            }}
-            src="images/deleteicon.svg"
-            alt="delete"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleOrderDelete(index);
-            }}
-          />
-        </div>
+        />
       ))}
+      </div>
     </div>
     <OrderProducts
       orderId={activeOrderId}
-      onClick={() => setActiveOrderId(undefined)}
+      onCloseClick={() => setActiveOrderId(undefined)}
     />
   </>
 )}

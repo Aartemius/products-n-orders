@@ -1,5 +1,4 @@
-import { IOrder } from "../components/orders/Orders";
-import { IProduct } from "../components/products/ProductDetails";
+import { IOrder, IProduct } from "../types/common";
 
 export enum ActionTypes {
   SET_ORDER_LIST = 'SET_ORDER_LIST',

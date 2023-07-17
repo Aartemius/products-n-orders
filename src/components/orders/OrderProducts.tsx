@@ -1,38 +1,59 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import ProductDetails from '../products/ProductDetails';
-import { useProductsByOrderId } from '../../hooks/common';
-
+import AddProductToOrderForm from '../forms/AddProductToOrderForm';
+import { v4 as uuidv4 } from 'uuid';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../store/reducers';
 export interface IOrderProductsProps {
-  orderId: number | undefined;
-  onClick?: () => void;
+  orderId?: number | undefined;
+  onCloseClick?: () => void;
 }
 
-const OrderProducts: FC<IOrderProductsProps> = ({orderId, onClick}) => {
-  const products = useProductsByOrderId(orderId);
+const OrderProducts: FC<IOrderProductsProps> = ({ orderId, onCloseClick }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const orderList = useSelector((state: AppState) => state.orderList);
+  const productList = useSelector((state: AppState) => state.productsList);
+  
+  const currentOrder = orderList.find(order => order.id === orderId);
+  const currentOrderProducts = currentOrder?.products;
+  const filteredProducts = productList.filter(item =>
+    currentOrderProducts?.some(obj => obj.id === item.id)
+  );
+  
   return (
     <>
-      {products?.length > 0 &&
+      {orderId &&
         <div
           className="order-products-wrap position-relative p-5"
           style={{ width: '60%' }}
         >
+          <div>{currentOrder?.title}</div>
+          <button
+            className="btn btn-secondary"
+            onClick={() => setIsModalVisible(true)}
+          >
+            Add product
+          </button>
+          { isModalVisible &&
+            <AddProductToOrderForm
+              orderId={orderId}
+              onCloseClick={() => setIsModalVisible(false)}
+            />
+          }
           <img
             src="images/closeIcon.svg"
             alt="close"
             className="position-absolute top-0 end-0"
-            onClick={onClick}
+            onClick={onCloseClick}
             style={{ cursor: 'pointer' }}
           />
-          {
-          products ?
-            products.map(product => (
-              <div>
-                <ProductDetails
-                  key={`product${product.id}`}
-                  product={product}
-                />
-              </div>
+          { filteredProducts && filteredProducts.length ?
+            filteredProducts.map(product => (
+              <ProductDetails
+                key={`product-${product.id}-${uuidv4()}`}
+                product={product}
+              />
             )) : (
             <div>no products in current order</div>
             )
@@ -44,3 +65,4 @@ const OrderProducts: FC<IOrderProductsProps> = ({orderId, onClick}) => {
 }
 
 export default OrderProducts;
+

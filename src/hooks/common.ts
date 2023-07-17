@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { IOrder } from "../components/orders/Orders";
-import { IProduct } from "../components/products/ProductDetails";
-
+import { IOrder, IProduct } from "../types/common";
 
 export const useOrderList = () => {
   const [orders, setOrders] = useState<IOrder[]>([]);
@@ -13,7 +11,13 @@ export const useOrderList = () => {
       setIsLoading(true);
       try {
         const response = await axios.get('/data.json');
-        setOrders(response.data.orders);
+        setOrders(
+          window.sessionStorage.getItem('ordersList')
+          ?
+          JSON.parse(window.sessionStorage.getItem('ordersList')!)
+          :
+          response.data.orders
+        );
       } catch (error) {
         console.error('Error fetching order list:', error);
       } finally {
@@ -24,7 +28,7 @@ export const useOrderList = () => {
     fetchData();
   }, []);
 
-  return {orders, isLoading};
+  return { orders, isLoading };
 };
 
 
@@ -35,21 +39,26 @@ export const useProductsList = () => {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      try {
-        const response = await axios.get("/data.json");
-        const { products } = response.data;
-        setProducts(products);
-      } catch (error) {
-        console.error("Error fetching product list:", error);
-      } finally {
+      if (window.sessionStorage.getItem('productsList')) {
+        setProducts(JSON.parse(window.sessionStorage.getItem('productsList')!));
         setIsLoading(false);
+      } else {
+        try {
+          const response = await axios.get("/data.json");
+          const { products } = response.data;
+          setProducts(products);
+        } catch (error) {
+          console.error("Error fetching product list:", error);
+        } finally {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchData();
   }, []);
 
-  return {products, isLoading};
+  return { products, isLoading };
 };
 
 
@@ -69,22 +78,50 @@ export const useProductFilterValues = async () => {
   }
 };
 
-
 export const useProductsByOrderId = (id: number | undefined) => {
   const [products, setProducts] = useState<IProduct[]>([]);
+
   useEffect(() => {
     (async () => {
       try {
         const response = await axios.get("/data.json");
-        const orderProductsIds = response.data.orders
+        const productsList = window.sessionStorage.getItem('productsList') ? JSON.parse(window.sessionStorage.getItem('productsList')!) : response.data.products;
+        const ordersList = window.sessionStorage.getItem('ordersList') ? JSON.parse(window.sessionStorage.getItem('ordersList')!) : response.data.orders; 
+
+        const orderProductsIds = ordersList
           .find((order: IOrder) => order.id === id)?.products
           .map((product: IProduct) => product.id);
-        const chosenProducts = response.data.products.filter((product: IProduct) => orderProductsIds?.includes(product.id));
+
+        const chosenProducts = productsList.filter((product: IProduct) => orderProductsIds?.includes(product.id));
         setProducts(chosenProducts);
       } catch (error) {
         console.error("Error fetching product by order id:", error);
       }
     })();
   }, [id]);
+
   return products;
+};
+
+
+export const useProductFilterValues2 = () => {
+  const [productTypes, setProductTypes] = useState<string[]>([]);
+  const [productSpecifications, setProductSpecifications] = useState<string[]>([]);
+
+  useEffect(() => {
+    axios
+      .get("/data.json")
+      .then(response => {
+        const { products } = response.data;
+        const types = [...new Set(products.map((product: IProduct) => product.type))] as string[];
+        const specifications = [...new Set(products.map((product: IProduct) => product.specification))] as string[];
+        setProductTypes(types);
+        setProductSpecifications(specifications);
+      })
+      .catch(error => {
+        console.error("Error fetching product list:", error);
+      });
+  }, []);
+
+  return { productTypes, productSpecifications };
 };

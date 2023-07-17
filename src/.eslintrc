@@ -4,7 +4,21 @@
     "react-app/jest"
   ],
   "rules": {
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": 1
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": 1,
+    "max-params": ["warn", 2],
+    "object-curly-spacing": ["warn", "always"],
+    "max-len": ["warn", {
+      "code": 120,
+      "ignorePattern": "^import\\s.+\\{\\s.*\\}\\sfrom\\s.+;$",
+      "ignoreUrls": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreRegExpLiterals": true
+    }],
+    "no-multi-spaces": "warn",
+    "newline-per-chained-call": ["warn", { "ignoreChainWithDepth": 1 }],
+    "array-element-newline": ["warn", { "minItems": 3 }],
+    "no-console": ["warn", { "allow": ["error"] }]
   }
 }

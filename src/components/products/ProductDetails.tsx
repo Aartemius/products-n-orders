@@ -1,34 +1,13 @@
 import { FC } from 'react';
-import { ProductTypes } from '../../types/common';
+import { IProduct, ProductTypes } from '../../types/common';
 import './ProductDetails.scss';
-
-export interface IProduct {
-  id: number;
-  serialNumber: number;
-  isNew: boolean;
-  photo: string;
-  title: string;
-  type: string;
-  specification: string;
-  guarantee: {
-    start: string;
-    end: string;
-  };
-  price: {
-    value: number;
-    symbol: string;
-    isDefault: boolean;
-  }[];
-  order: number;
-  date: string;
-}
 
 interface ProductDetailsProps {
   product: IProduct;
   onClick?: () => void;
 }
 
-const ProductDetails: FC<ProductDetailsProps> = ({product, onClick}) => (
+const ProductDetails: FC<ProductDetailsProps> = ({ product, onClick }) => (
   <>
     {product &&
       <div
@@ -46,7 +25,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({product, onClick}) => (
           background: product.type === ProductTypes.MONITORS ? 'orange' : 'green',
           
         }}></div>
-        <div className="product-img-wrap">
+        <div className="product-img-wrap test-class">
           <img src={product.photo} alt={product.title} style={{ height: '100%', maxHeight: '50px' }}/>
         </div>
         <div className="d-flex flex-column product-title-wrap">

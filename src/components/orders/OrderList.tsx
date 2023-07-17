@@ -24,7 +24,7 @@ const OrderList = () => {
         <div className="d-flex">
           {
             orderList.length ? (
-              <Orders orders={orderList} />
+              <Orders />
             ) : 
             <div>No results found</div>
           }
