@@ -28,9 +28,9 @@ const OrderProducts: FC<IOrderProductsProps> = ({ orderId, onCloseClick }) => {
           className="order-products-wrap position-relative p-5"
           style={{ width: '60%' }}
         >
-          <div>{currentOrder?.title}</div>
+          <h5>{currentOrder?.title}</h5>
           <button
-            className="btn btn-secondary"
+            className="btn btn-secondary mb-3"
             onClick={() => setIsModalVisible(true)}
           >
             Add product

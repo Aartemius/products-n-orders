@@ -43,7 +43,7 @@ const AppContainer: FC = () => {
         </div>
       </div>
       <div
-        className="app-wrap p-3 pt-5"
+        className={ location.pathname === links.orders.path ? "app-wrap p-3 pt-5 d-flex" : "app-wrap p-3 pt-5" }
         style={{ background: 'rgba(0,0,0, .05)' }}
       >
         <Routes>
