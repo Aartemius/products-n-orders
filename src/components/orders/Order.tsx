@@ -56,7 +56,7 @@ const Order: FC<IOrderProps> = ({ onClick, order }) => {
           width: '30px',
           cursor: 'pointer'
         }}
-        src="../../../images/deleteicon.svg"
+        src="images/deleteIcon.svg"
         alt="delete"
         onClick={(e) => {
           e.stopPropagation();

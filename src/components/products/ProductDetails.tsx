@@ -66,7 +66,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({
             onClick={onClick}
             style={{ cursor: 'pointer' }}
           >
-            <img style={{ width: '30px' }} src="../../../images/deleteicon.svg" alt="delete" />
+            <img style={{ width: '30px' }} src="images/deleteIcon.svg" alt="delete" />
           </div>
         }
       </div>
