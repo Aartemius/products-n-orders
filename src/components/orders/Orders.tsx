@@ -35,9 +35,14 @@ const Orders: FC = () => {
       {orderList.map((order, index) => (
         <Order 
           key={order.id}
-          index={index}
           order={order}
-          onClick={() => setActiveOrderId(order.id)}
+          onClick={() => setActiveOrderId(prevId => {
+            if (prevId && prevId === order.id) {
+              return undefined;
+            }
+            
+            return order.id;
+          })}
         />
       ))}
       </div>

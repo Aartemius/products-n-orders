@@ -45,7 +45,7 @@ const OrderProducts: FC<IOrderProductsProps> = ({ orderId, onCloseClick }) => {
             src="images/closeIcon.svg"
             alt="close"
             className="position-absolute top-0 end-0"
-            onClick={onCloseClick}
+            onClick={ onCloseClick }
             style={{ cursor: 'pointer' }}
           />
           { filteredProducts && filteredProducts.length ?
@@ -53,6 +53,7 @@ const OrderProducts: FC<IOrderProductsProps> = ({ orderId, onCloseClick }) => {
               <ProductDetails
                 key={`product-${product.id}-${uuidv4()}`}
                 product={product}
+                isDetailsCut
               />
             )) : (
             <div>no products in current order</div>

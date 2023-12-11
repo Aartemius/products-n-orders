@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { IOrder, IProduct } from "../types/common";
 
 export enum ActionTypes {

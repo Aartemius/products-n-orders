@@ -27,6 +27,9 @@
   }
   .product-specification {
     width: 6%;
+    &.cut {
+      width: 20%;
+    }
   }
   .product-date {
     width: 12%;

@@ -9,10 +9,9 @@ import { IOrder } from "../../types/common";
 interface IOrderProps {
   onClick?: () => void;
   order: IOrder;
-  index: number;
 }
 
-const Order: FC<IOrderProps> = ({ onClick, order, index }) => {
+const Order: FC<IOrderProps> = ({ onClick, order }) => {
   const [activeOrderId, setActiveOrderId] = useState<number | undefined>(undefined);
   const dispatch = useDispatch();
   const orderList = useSelector((state: AppState) => state.orderList);
@@ -57,7 +56,7 @@ const Order: FC<IOrderProps> = ({ onClick, order, index }) => {
           width: '30px',
           cursor: 'pointer'
         }}
-        src="images/deleteicon.svg"
+        src="../../../images/deleteicon.svg"
         alt="delete"
         onClick={(e) => {
           e.stopPropagation();
